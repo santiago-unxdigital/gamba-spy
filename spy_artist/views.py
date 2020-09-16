@@ -7,6 +7,7 @@ import time
 import sys
 from pprint import pprint
 from . import forms
+import csv
 
 '''
 def index(request, artist):
@@ -48,6 +49,7 @@ def output(request):
 
             try:
                 artist = result['artists']['items'][0]
+                request.session['artist'] = artist
             except:
                 artist = None
 
@@ -56,3 +58,16 @@ def output(request):
             return render(request, 'output.html', context)
     else:
             form = forms.InputForm()
+
+def download(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="Search Results.csv"'
+
+    artist = request.session.get('artist')
+
+
+    writer = csv.writer(response)
+    writer.writerow(['Name', 'Spotify ID', 'Genders', 'Followers', 'Popularity', 'External url'])
+    writer.writerow([artist['name'], artist['id'], artist['genres'], artist['followers']['total'], artist['popularity'], artist['external_urls']['spotify']])
+    
+    return response

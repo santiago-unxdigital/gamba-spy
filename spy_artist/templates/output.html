@@ -41,8 +41,8 @@
                 <td>{{artist.id}}</td>
             </tr>
             <tr>
-                <th>Genders</th>
-                <td>{% for gender in artist.genres %} <ul>{{ gender }} </ul>{% endfor %}</td>
+                <th>Genres</th>
+                <td>{% for genre in artist.genres %} <ul>{{ genre }} </ul>{% endfor %}</td>
             </tr>
             
             <tr>
@@ -55,11 +55,13 @@
                 <td>{{artist.popularity}}</td>
             </tr>
             <tr>
-                <th>External urls</th>
+                <th>External url</th>
                 <td><a href={{ artist.external_urls.spotify }}>{{ artist.external_urls.spotify }}</a></th>
             </tr>
         </tbody>
     </table>
+
+    <a  href="/download"> Download Result </a>
 {% else %}
     <br>
     <h1>No artist found</h1>
