@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <title>Gamba Spy</title>
+  <link crossorigin="anonymous"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+        integrity="sha256-8B1OaG0zT7uYA572S2xOxWACq9NXYPQ+U5kHPV1bJN4="
+        rel="stylesheet"/>
+  <link rel="shortcut icon" type="image/png" href="https://assets.digitalocean.com/logos/favicon.png"/>
+</head>
+<body>
+  <nav aria-label="main navigation" class="navbar is-light" role="navigation">
+    <div class="navbar-brand">
+        <div class="navbar-item">
+            <img atl="DigitalOcean" src="https://assets.digitalocean.com/logos/DO_Logo_icon_blue.png"
+                 style="margin-right: 0.5em;">Gamba Spy
+        </div>
+    </div>
+</nav>
+
+{% if artist %}
+    <table class="table is-fullwidth is-striped is-bordered">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Image</th>
+                <td><img src={{artist.images.2.url}} width="160" height="160"></td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ artist.name }}</td>
+            </tr>
+            <tr>
+                <th>Spotify ID</th>
+                <td>{{artist.id}}</td>
+            </tr>
+            <tr>
+                <th>Genders</th>
+                <td>{% for gender in artist.genres %} <ul>{{ gender }} </ul>{% endfor %}</td>
+            </tr>
+            
+            <tr>
+                <th>Followers</th>
+                <td>{{artist.followers.total}}</td>
+            </tr>
+            
+            <tr>
+                <th>Popularity</th>
+                <td>{{artist.popularity}}</td>
+            </tr>
+            <tr>
+                <th>External urls</th>
+                <td><a href={{ artist.external_urls.spotify }}>{{ artist.external_urls.spotify }}</a></th>
+            </tr>
+        </tbody>
+    </table>
+{% else %}
+    <h1>No artist found</h1>
+{% endif %}
+<br>
+<button><a href="/spy_artist">Another Spy</a></button>
+
+</body>
+</html>
