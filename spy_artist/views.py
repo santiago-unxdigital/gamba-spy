@@ -168,10 +168,10 @@ def output(request):
                 request.session['final_df'] = final_df
             except:
                 artist = None
-
-            context = {
-                'artist': artist, 
-                'final_df': final_df
+            finally:
+                context = {
+                    'artist': artist, 
+                    'final_df': final_df 
                 }
 
             return render(request, 'output.html', context)
