@@ -184,8 +184,7 @@ async def output(request):
         form = forms.InputForm(request.POST)
         if form.is_valid():
 
-            loop = asyncio.get_event_loop()
-            context = loop.create_task(http_call_async(form.cleaned_data['input1']))
+            context = await http_call_async(form.cleaned_data['input1'])
 
                 
             return render(request, 'output.html', context)
