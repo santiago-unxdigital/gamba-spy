@@ -164,11 +164,13 @@ def output(request):
                 final_df = df.sort_values('popularity', ascending=False).drop_duplicates('name').sort_index()
                 final_df = final_df.to_json(orient='records')
                 
-                request.session['artist'] = artist
-                request.session['final_df'] = final_df
             except:
                 artist = None
+                final_df = None
             finally:
+                request.session['artist'] = artist
+                request.session['final_df'] = final_df
+
                 context = {
                     'artist': artist, 
                     'final_df': final_df 
